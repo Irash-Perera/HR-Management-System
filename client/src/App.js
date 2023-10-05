@@ -5,32 +5,34 @@ import {
   Routes,
   Route
 }from "react-router-dom";
-import Configure from "./components/config/UpdateDepartment";
+import Configure from "./components/configure/UpdateDepartment";
 import Append from "./components/append/AddJob";
-import Department from './components/models/Department';
+import Department from './components/assets/Department';
 import Adddept from './components/append/Add_dept';
 import Addemployee from './components/append/Add_employee';
-import Login from './components/models/Login';
+import Login from './components/assets/Login';
 import AdminDashboard from './components/dashborads/AdminDashboard'
 import Level1Dashboard from './components/dashborads/Level1Dashboard'
 import SupervisorDashboard from './components/dashborads/SupervisorDashboard';
 import HRDashboard from './components/dashborads/HRDashboard';
 import SecMngUserDashboard from './components/dashborads/SecMngUserDashboard';
-import Employee from './components/models/Employee';
-import Branch from './components/models/Branch';
-import Job from './components/models/JobTitle';
-import LeaveBal from './components/models/LeaveBalance';
-import UpdateLeaveBal from './components/config/UpdateLeaveBal';
-import Paygrade from './components/models/Paygrade';
-import UpdatePaygrade from './components/config/UpdatePaygrade';
-import LeaveRequest from './components/models/LeaveRequests';
-import EmergencyCont from './components/models/EmergencyCont';
-import UpdateEmergencyCont from './components/config/UpdateEmergCont';
-import DependantInfo from './components/models/DependantInfo';
+import Employee from './components/assets/Employee';
+import Branch from './components/assets/Branch';
+import Job from './components/assets/JobTitle';
+import LeaveBal from './components/assets/LeaveBalance';
+import UpdateLeaveBal from './components/configure/UpdateLeaveBal';
+import Paygrade from './components/assets/Paygrade';
+import UpdatePaygrade from './components/configure/UpdatePaygrade';
+import LeaveRequest from './components/assets/LeaveRequests';
+import EmergencyCont from './components/assets/EmergencyCont';
+import UpdateEmergencyCont from './components/configure/UpdateEmergCont';
+import DependantInfo from './components/assets/DependantInfo';
 import AddDependent from './components/append/AddDependent';
-import UpdateEmployee from './components/config/UpdateEmployee';
-import Departmenthr from './components/models/Departmenthr';
-import LeaveBalancehr from './components/models/LeaveBalancehr';
+import UpdateEmployee from './components/configure/UpdateEmployee';
+import Departmenthr from './components/assets/Departmenthr';
+import LeaveBalancehr from './components/assets/LeaveBalancehr';
+import Report from './components/assets/ReportbyDept'
+import Report1 from './components/assets/ReportbyLeave'
 
 function App() {
   return (
@@ -64,6 +66,9 @@ function App() {
           <Route path="/update_employee/:Employee_ID" element={<UpdateEmployee/>}/>
           <Route path="/departmenthr" element={<Departmenthr/>}/>
           <Route path="/leavebalancehr" element={<LeaveBalancehr/>}/>
+          <Route path="/report" element={<Report/>}/>
+          <Route path="/report1" element={<Report1/>}/>
+          
 
 
         
