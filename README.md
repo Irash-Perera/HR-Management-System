@@ -7,6 +7,8 @@ Copy the code of jupiterapparels.sql and paste it on your workbench after creati
 
 Some triggers added to the db.       
 -Auto updating leave_balance table when new employee added.         
--Auto cheking when an employee is being adding whether dept_ID and job title_ID exist.
+-Auto cheking when an employee is being adding whether dept_ID and job title_ID exist.        
+
+Password encrypting done.
 
 
