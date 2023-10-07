@@ -115,9 +115,41 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  transition: background-color 0.3s ease; /* Add this transition */
+  transition: background-color 0.3s ease; 
 }
 
 .generate-reports:hover {
   background-color: rgba(0, 0, 0, 0.9); /* Darker black on hover */
+}
+
+.assign-secmng {
+  background-color: rgba(0, 0, 0, 0.8); /* Dark black background */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.assign-secmng h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff; /* White text color */
+  text-decoration: none;
+}
+
+.assign-secmng p {
+  font-size: 18px;
+  color: #fff; /* White text color */
+}
+
+.assign-secmng-link {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: background-color 0.3s ease;
 }

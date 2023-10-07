@@ -1,6 +1,7 @@
 import express from "express"
 import mysql from "mysql2"
 import cors from "cors"
+import bcrypt from "bcrypt";
 
 const app = express()
 
@@ -20,22 +21,46 @@ app.get("/", (req, res) => {
     res.json("Welcome to Jupiter Apparels")
 })
 
-app.post("/login", (req, res) => {
-    const q = "SELECT * FROM user WHERE User_ID = ? AND Password = ?";
-    db.query(q, [req.body.User_ID, req.body.Password], (err, data) => {
+
+app.post("/login", (req, res) => {   
+
+    const q = "SELECT * FROM user WHERE User_ID = ?";
+    db.query(q, [req.body.User_ID], (err, data) => {
         if (err) {
             console.error(err);
             return res.json("Error");
         }
 
-        if (data.length > 0) {
-            const user = data[0];
-            return res.json({ status: "Success", role: user.Access_level });
+        const user = data[0];
+        bcrypt.compare(req.body.Password,user.Password ).then(function(result) {
+            if (result) {           
+                return res.json({ status: "Success", role: user.Access_level });
 
-        } else {
+        } 
+        else {
             return res.json("Invalid");
         }
+        });
+        
     });
+});
+
+
+app.post("/userCreate", (req, res) => { 
+
+    bcrypt.hash(req.body.Password, 10).then(function(hash) {
+        const q = "INSERT INTO user (User_ID, Employee_ID, Access_level, Password) VALUES (?, ?, ?,?)";
+        db.query(q, [req.body.User_ID, req.body.Employee_ID,req.body.Access_level,hash], (err, data) => {
+
+            if (err) {
+                console.error(err);
+                return res.json("Error");
+            }
+
+            return res.json("Success");
+        });
+    });
+     
 });
 
 app.get("/department", (req, res) => {

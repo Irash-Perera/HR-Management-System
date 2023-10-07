@@ -33,6 +33,7 @@ import Departmenthr from './components/assets/Departmenthr';
 import LeaveBalancehr from './components/assets/LeaveBalancehr';
 import Report from './components/assets/ReportbyDept'
 import Report1 from './components/assets/ReportbyLeave'
+import SecMngUserCreate from './components/append/Add_secmng';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route path="/leavebalancehr" element={<LeaveBalancehr/>}/>
           <Route path="/report" element={<Report/>}/>
           <Route path="/report1" element={<Report1/>}/>
+          <Route path="/add_secmng" element={<SecMngUserCreate/>}/>
           
 
 
