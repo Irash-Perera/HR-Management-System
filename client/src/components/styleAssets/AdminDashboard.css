@@ -8,16 +8,19 @@
 
 .sidebar {
   width: 250px;
-  background-color: rgba(10, 2, 43, 0.8);
+  backdrop-filter: blur(10px);
   color: #fff;
   padding: 20px;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.2);
   transition: width 0.3s ease;
+  background-image: url('https://images.unsplash.com/photo-1513569771920-c9e1d31714af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');
+  background-size: cover;
 }
 
 .sidebar h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #000000;
 }
 
 .sidebar ul {
@@ -30,7 +33,7 @@
 }
 
 .sidebar ul li .viewbutton {
-  background-color: #0fa351;
+  background-color: #494747;
   padding: 10px;
   border: none;
   width: 100%;
@@ -49,7 +52,7 @@
 }
 
 .sidebar ul li .viewbutton:hover {
-  background-color: #060321;
+  background-color: #101010;
 }
 
 .content {
@@ -64,13 +67,13 @@
   text-align: center;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 .content header h1 {
   font-size: 32px;
-  color: #fff;
+  color: #000000;
 }
 
 
@@ -88,6 +91,7 @@
 
 .generate-reports {
   background-color: rgba(0, 0, 0, 0.8); /* Dark black background */
+  backdrop-filter: blur(5px);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
@@ -96,11 +100,10 @@
   position: relative;
 }
 
-.generate-reports h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #fff; /* White text color */
+.generate-reports h3 a,
+.assign-secmng h3 a {
   text-decoration: none;
+  color: #fff; 
 }
 
 .generate-reports p {
@@ -132,11 +135,10 @@
   position: relative;
 }
 
-.assign-secmng h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #fff; /* White text color */
-  text-decoration: none;
+.assign-secmng h3 a,
+.assign-secmng h3 a {
+  text-decoration: none; 
+  color: #fff; 
 }
 
 .assign-secmng p {

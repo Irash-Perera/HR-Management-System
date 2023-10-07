@@ -17,7 +17,6 @@ const SecMngDashboard = () => {
           <li><button className="add viewbutton"><Link to="/leave_bal">Leave Balances</Link></button></li>
           <li><button className="add viewbutton"><Link to="/leave_request">Leave Requests</Link></button></li>
           <li><button className="add viewbutton"><Link to="/paygrade">Paygrades</Link></button></li>
-          <li><button className="add viewbutton">Generate Reports</button></li>
         </ul>
       </aside>
 
@@ -26,6 +25,27 @@ const SecMngDashboard = () => {
           <h1 className="company">Jupiter Apparels</h1>
           <h1>Welcome! Senond Management User!</h1>
         </header>
+
+
+        <div className="widget generate-reports">
+            <h3><Link to="/report" className="generate-reports-link">Department Reports</Link></h3>
+            <p>Generate Employee Reports by Department</p>
+        </div>
+
+        <div className="widget generate-reports">
+            <h3><Link to="/report1" className="generate-reports-link">Leave Reports</Link></h3>
+            <p>Generate Leave Reports by Department</p>
+        </div>
+
+        <div className="widget generate-reports">
+            <h3><Link to="/report2" className="generate-reports-link">Paygrade Reports</Link></h3>
+            <p>Generate Employee Reports by Paygrade</p>
+        </div>
+
+        <div className="widget generate-reports">
+            <h3><Link to="/report3" className="generate-reports-link">Job Title Reports</Link></h3>
+            <p>Generate Employee Reports by Job Title</p>
+        </div>
 
       </main>
     </div>

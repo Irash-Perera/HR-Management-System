@@ -374,13 +374,25 @@ app.get("/dept/:departmentId", (req,res) => {
     });
 });
 
+
 app.get("/paygrade/:paygrade_ID", (req,res) => {
-    const id = req.params.departmentId;
+    const id = req.params.paygrade_ID;
 
     const q =`
         SELECT
-            pay_
-            
+            employee.Employee_ID,
+            employee.First_Name,
+            employee.Last_Name,
+            employee.NIC,
+            employee.Date_Of_Birth,
+            employee.Gender,
+            employee.Tel_No,
+            employee.Email,
+            department.Dept_Name AS Department,
+            employee.Maritial_Status,
+            job_title.Title AS Title,
+            employee.Status_ID,
+            employee.Supervisor_ID
             FROM
             employee
             INNER JOIN
@@ -388,7 +400,7 @@ app.get("/paygrade/:paygrade_ID", (req,res) => {
             INNER JOIN
             department ON employee.Dept_ID = department.Dept_ID
             WHERE
-            employee.Dept_ID = ?`;
+            employee.Paygrade_ID = ?`;
     db.query(q, [id], (err, data) => {
         if(err){
             return res.json(err)
@@ -396,6 +408,8 @@ app.get("/paygrade/:paygrade_ID", (req,res) => {
         return res.json(data)
     });
 });
+
+
 
 app.get("/leavebal/:departmentId", (req,res) => {
     const id = req.params.departmentId;
@@ -416,6 +430,41 @@ app.get("/leavebal/:departmentId", (req,res) => {
             WHERE
             employee.Dept_ID = ?
             GROUP BY department.Dept_ID`;
+    db.query(q, [id], (err, data) => {
+        if(err){
+            return res.json(err)
+        }
+        return res.json(data)
+    });
+});
+
+app.get("/jobreport/:jobTitleId", (req,res) => {
+    const id = req.params.jobTitleId;
+
+    const q =`
+        SELECT
+            employee.Employee_ID,
+            employee.First_Name,
+            employee.Last_Name,
+            employee.NIC,
+            employee.Date_Of_Birth,
+            employee.Gender,
+            employee.Tel_No,
+            employee.Email,
+            department.Dept_Name AS Department,
+            employee.Maritial_Status,
+            job_title.Title AS Title,
+            employee.Paygrade_ID,
+            employee.Status_ID,
+            employee.Supervisor_ID
+            FROM
+            employee
+            INNER JOIN
+            job_title ON employee.Title_ID = job_title.Title_ID
+            INNER JOIN
+            department ON employee.Dept_ID = department.Dept_ID
+            WHERE
+            employee.Title_ID = ?`;
     db.query(q, [id], (err, data) => {
         if(err){
             return res.json(err)

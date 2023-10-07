@@ -7,32 +7,34 @@ import {
 }from "react-router-dom";
 import Configure from "./components/configure/UpdateDepartment";
 import Append from "./components/append/AddJob";
-import Department from './components/assets/Department';
+import Department from './components/modules/Department';
 import Adddept from './components/append/Add_dept';
 import Addemployee from './components/append/Add_employee';
-import Login from './components/assets/Login';
+import Login from './components/modules/Login';
 import AdminDashboard from './components/dashborads/AdminDashboard'
 import Level1Dashboard from './components/dashborads/Level1Dashboard'
 import SupervisorDashboard from './components/dashborads/SupervisorDashboard';
 import HRDashboard from './components/dashborads/HRDashboard';
 import SecMngUserDashboard from './components/dashborads/SecMngUserDashboard';
-import Employee from './components/assets/Employee';
-import Branch from './components/assets/Branch';
-import Job from './components/assets/JobTitle';
-import LeaveBal from './components/assets/LeaveBalance';
+import Employee from './components/modules/Employee';
+import Branch from './components/modules/Branch';
+import Job from './components/modules/JobTitle';
+import LeaveBal from './components/modules/LeaveBalance';
 import UpdateLeaveBal from './components/configure/UpdateLeaveBal';
-import Paygrade from './components/assets/Paygrade';
+import Paygrade from './components/modules/Paygrade';
 import UpdatePaygrade from './components/configure/UpdatePaygrade';
-import LeaveRequest from './components/assets/LeaveRequests';
-import EmergencyCont from './components/assets/EmergencyCont';
+import LeaveRequest from './components/modules/LeaveRequests';
+import EmergencyCont from './components/modules/EmergencyCont';
 import UpdateEmergencyCont from './components/configure/UpdateEmergCont';
-import DependantInfo from './components/assets/DependantInfo';
+import DependantInfo from './components/modules/DependantInfo';
 import AddDependent from './components/append/AddDependent';
 import UpdateEmployee from './components/configure/UpdateEmployee';
-import Departmenthr from './components/assets/Departmenthr';
-import LeaveBalancehr from './components/assets/LeaveBalancehr';
-import Report from './components/assets/ReportbyDept'
-import Report1 from './components/assets/ReportbyLeave'
+import Departmenthr from './components/modules/Departmenthr';
+import LeaveBalancehr from './components/modules/LeaveBalancehr';
+import Report from './components/modules/ReportbyDept';
+import Report1 from './components/modules/ReportbyLeave';
+import Report2 from './components/modules/ReportbyPaygrade';
+import Report3 from './components/modules/ReportbyTitle';
 import SecMngUserCreate from './components/append/Add_secmng';
 
 function App() {
@@ -69,6 +71,8 @@ function App() {
           <Route path="/leavebalancehr" element={<LeaveBalancehr/>}/>
           <Route path="/report" element={<Report/>}/>
           <Route path="/report1" element={<Report1/>}/>
+          <Route path="/report2" element={<Report2/>}/>
+          <Route path="/report3" element={<Report3/>}/>
           <Route path="/add_secmng" element={<SecMngUserCreate/>}/>
           
 

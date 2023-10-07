@@ -26,23 +26,23 @@ const AdminDashboard = () => {
         </header>
 
         <div className="widget generate-reports">
-            <h3><Link to="/report" className="generate-reports-link">Generate Employee Reports by Department</Link></h3>
-            <p>Employee by Department Reports</p>
+            <h3><Link to="/report" className="generate-reports-link">Department Reports</Link></h3>
+            <p>Generate Employee Reports by Department</p>
         </div>
 
         <div className="widget generate-reports">
-            <h3><Link to="/report1" className="generate-reports-link">Generate Leave Reports by Department</Link></h3>
-            <p>Leaves by Department Reports</p>
+            <h3><Link to="/report1" className="generate-reports-link">Leave Reports</Link></h3>
+            <p>Generate Leave Reports by Department</p>
         </div>
 
         <div className="widget generate-reports">
-            <h3><Link to="/report1" className="generate-reports-link">Generate Employee Reports by Paygrade</Link></h3>
-            <p>Employee by Paygrade Reports</p>
+            <h3><Link to="/report2" className="generate-reports-link">Paygrade Reports</Link></h3>
+            <p>Generate Employee Reports by Paygrade</p>
         </div>
 
         <div className="widget generate-reports">
-            <h3><Link to="/report1" className="generate-reports-link">Generate Employee Reports by Job Title</Link></h3>
-            <p>Employee by Job Title Reports</p>
+            <h3><Link to="/report3" className="generate-reports-link">Job Title Reports</Link></h3>
+            <p>Generate Employee Reports by Job Title</p>
         </div>
 
       </main>

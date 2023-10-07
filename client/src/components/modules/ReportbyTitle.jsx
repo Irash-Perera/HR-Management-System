@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styleAssets/Report.css';
 
-const DepartmentEmployees = () => {
-  const [departmentId, setDepartmentId] = useState('');
+const JobtitleEmployees = () => {
+  const [jobTitleId, setJobTitleId] = useState('');
   const [employees, setEmployees] = useState([]);
 
-  const fetchDepartmentEmployees = async () => {
+  const fetchJobTitleEmployees = async () => {
     try {
-      const res = await axios.get("http://localhost:8800/dept/"+departmentId);
+      const res = await axios.get("http://localhost:8800/jobreport/"+jobTitleId);
       setEmployees(res.data);
     } catch (err) {
       console.log(err);
@@ -17,14 +17,14 @@ const DepartmentEmployees = () => {
 
   return (
     <div>
-      <h2>Department Employees</h2>
-      <label>Department ID: </label>
+      <h2>Job of Employees</h2>
+      <label>Job ID: </label>
       <input
         type="text"
-        value={departmentId}
-        onChange={(e) => setDepartmentId(e.target.value)}
+        value={jobTitleId}
+        onChange={(e) => setJobTitleId(e.target.value)}
       />
-      <button onClick={fetchDepartmentEmployees}>Fetch Employees</button>
+      <button onClick={fetchJobTitleEmployees}>Fetch Employees</button>
 
       <table className='Employee-table'>
         <thead>
@@ -36,8 +36,8 @@ const DepartmentEmployees = () => {
             <th>Date of Birth</th>
             <th>Gender</th>
             <th>Tel-No</th>
+            <th>Department</th>
             <th>Maritial Status</th>
-            <th>Job Title</th>
             <th>PayGrade</th>
             <th>Status ID</th>
             <th>Supervisor ID</th>
@@ -54,8 +54,8 @@ const DepartmentEmployees = () => {
               <td>{employee.Date_Of_Birth}</td>
               <td>{employee.Gender}</td>
               <td>{employee.Tel_No}</td>
+              <td>{employee.Department}</td>
               <td>{employee.Maritial_Status}</td>
-              <td>{employee.Title}</td>
               <td>{employee.Paygrade_ID}</td>
               <td>{employee.Status_ID}</td>
               <td>{employee.Supervisor_ID}</td>
@@ -68,4 +68,4 @@ const DepartmentEmployees = () => {
   );
 };
 
-export default DepartmentEmployees;
+export default JobtitleEmployees;
