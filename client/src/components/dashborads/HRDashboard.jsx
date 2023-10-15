@@ -3,6 +3,7 @@ import '../styleAssets/AdminDashboard.css';
 import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
+  const  employeeId  =  sessionStorage.getItem('user');
   return (
     <div className="admin-dashboard">
       <aside className="sidebar">
@@ -16,6 +17,13 @@ const AdminDashboard = () => {
           <li><button className="add viewbutton"><Link to="/branch"> View Branches</Link></button></li>
           <li><button className="add viewbutton"><Link to="/leavebalancehr">View Leave Balances</Link></button></li>
           <li><button className="add viewbutton"><Link to="/paygrade">Edit Leave Allowances</Link></button></li>
+          <li><button className="add viewbutton"><Link to="/add-custom-field">Add Custom Field</Link></button></li>
+          <li><button className="add viewbutton"><Link to="/add-new-user">Create New User Account</Link></button></li>
+          <li>
+            <button className="add viewbutton">
+              <Link to={`/personal-details/${employeeId}`}>View My Personal Information</Link>
+            </button>
+          </li>
         </ul>
       </aside>
 
@@ -43,6 +51,11 @@ const AdminDashboard = () => {
         <div className="widget generate-reports">
             <h3><Link to="/report3" className="generate-reports-link">Job Title Reports</Link></h3>
             <p>Generate Employee Reports by Job Title</p>
+        </div>
+
+        <div className="widget generate-reports">
+            <h3><Link to="/report4" className="generate-reports-link">Custom Field Reports</Link></h3>
+            <p>Generate Employee Reports for the Custom Field which have been added later</p>
         </div>
 
       </main>
