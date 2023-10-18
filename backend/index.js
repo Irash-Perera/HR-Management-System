@@ -16,7 +16,6 @@ app.use(express.json())
 app.use(cors())
 
 
-
 app.get("/", (req, res) => {
     res.json("Welcome to Jupiter Apparels")
 })
@@ -34,7 +33,8 @@ app.post("/login", (req, res) => {
         const user = data[0];
         bcrypt.compare(req.body.Password,user.Password ).then(function(result) {
             if (result) {           
-                return res.json({ status: "Success", role: user.Access_level });
+                return res.json({ status: "Success", role: user.Access_level,EMP_id: user.Employee_ID });
+
 
         } 
         else {
@@ -215,7 +215,35 @@ app.post("/dependant_info", (req, res) => {
     })
 })
 
-app.post("/department", (req, res) => {
+app.post("/request_leave", (req, res) => {
+    const supervisorQuery = "SELECT Supervisor_ID FROM employee WHERE Employee_ID = ?";
+    db.query(supervisorQuery, [req.body.Employee_ID], (err, results) => {
+      if (err) {
+        return res.json(err);
+      }
+  
+      if (results.length === 0) {
+        return res.json({ error: "Employee not found" });
+      }
+  
+      const supervisorID = results[0].Supervisor_ID;
+  
+      const leaveRequestQuery = "INSERT INTO leave_request (Leave_Request_ID,Employee_ID, Start_Date, End_Date, Leave_Type, Status, Reason, Duration, Comments,Supervisor_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      const leaveRequestValues = [req.body.Leave_Request_ID,req.body.Employee_ID, req.body.Start_Date, req.body.End_Date, req.body.Leave_Type, req.body.Status, req.body.Reason, req.body.Duration,req.body.Comments, supervisorID];
+  
+      db.query(leaveRequestQuery, leaveRequestValues, (err, data) => {
+        if (err) {
+          return res.json(err);
+        }
+        return res.json(data);
+      })
+    })
+  })
+  
+
+    
+
+app.post("/", (req, res) => {
     const q ="INSERT INTO department (Dept_ID,Dept_Name,Building,Branch_ID) VALUES (?)";
     const values =[req.body.Dept_ID, req.body.Dept_Name, req.body.Building, req.body.Branch_ID];
 
@@ -227,19 +255,53 @@ app.post("/department", (req, res) => {
     })
 })
 
-app.post("/employee", (req, res) => {
-    const q ="INSERT INTO employee (Employee_ID, First_Name, Last_Name, NIC, Date_of_Birth, Gender, Tel_No, Email, Dept_ID, Maritial_Status, Title_ID, Paygrade_ID, Status_ID, Supervisor_ID) VALUES (?)";
-    const values =[req.body.Employee_ID, req.body.First_Name, req.body.Last_Name, req.body.NIC, req.body.Date_of_Birth, req.body.Gender, req.body.Tel_No, req.body.Email, req.body.Dept_ID, req.body.Maritial_Status, req.body.Title_ID, req.body.Paygrade_ID, req.body.Status_ID, req.body.Supervisor_ID
-    ];
+app.post("/employee", async (req, res) => {
+    console.log(req.body.employee.Employee_ID);
+  
+    try {
+      // Insert employee data into the employee table
+      const q = "INSERT INTO employee (Employee_ID, First_Name, Last_Name, NIC, Date_of_Birth, Gender, Tel_No, Email, Dept_ID, Maritial_Status, Title_ID, Paygrade_ID, Status_ID, Supervisor_ID) VALUES (?)";
+      const values = [
+        req.body.employee.Employee_ID,
+        req.body.employee.First_Name,
+        req.body.employee.Last_Name,
+        req.body.employee.NIC,
+        req.body.employee.Date_of_Birth,
+        req.body.employee.Gender,
+        req.body.employee.Tel_No,
+        req.body.employee.Email,
+        req.body.employee.Dept_ID,
+        req.body.employee.Maritial_Status,
+        req.body.employee.Title_ID,
+        req.body.employee.Paygrade_ID,
+        req.body.employee.Status_ID,
+        req.body.employee.Supervisor_ID,
+      ];
+  
+      await db.promise().query(q, [values]);
+  
+      // Insert custom fields into the Employee_custom_field table
+      for (const field in req.body.customFieldValue) {
+        const key = field;
+        const Emp_Id = req.body.employee.Employee_ID;
+        const value = req.body.customFieldValue[field];
+  
+        const q1 = "INSERT INTO Employee_custom_field (Field_ID, Employee_ID, Field_val) VALUES (?)";
+        const values1 = [key, Emp_Id, value];
+        
+        await db.promise().query(q1, [values1]);
+      }
+  
+      // If all database operations are successful, send a success response
+      res.json({ message: "Employee added successfully." });
+    } catch (err) {
+      console.error(err);
+      // If there's an error, send an error response
+      res.status(500).json({ error: "Failed to add the employee." });
+    }
+  });
 
-    db.query(q, [values], (err, data) => {
-        if(err){
-            return res.json(err);
-        }
-        return res.json(data);
-    })
-})
-
+  
 app.put("/department/:Dept_ID", (req, res) => {
     const id = req.params.Dept_ID;
     const build = req.body.Building;
@@ -281,6 +343,21 @@ app.put("/employee/:Employee_ID", (req, res) => {
     const supervisor = req.body.Supervisor_ID;
     const q = "UPDATE employee SET `Tel_No` = ?, `Dept_ID` = ?, `Title_ID` = ?, `Paygrade_ID` = ?, `Status_ID` = ?, `Supervisor_ID` = ? WHERE Employee_ID = ?";
     const values = [telNo, deptID, titleID, paygrade, status, supervisor, id];
+
+    db.query(q, values, (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+app.put("/leave_request_takeaction/:Employee_ID", (req, res) => {
+    const id = req.params.Employee_ID;
+    const stat = req.body.Status;
+    const comm = req.body.Comments;
+    const q = "UPDATE leave_request SET `Status` = ?, `Comments` = ? WHERE Employee_ID = ?";
+    const values = [stat, comm, id];
 
     db.query(q, values, (err, data) => {
         if (err) {
@@ -409,6 +486,19 @@ app.get("/paygrade/:paygrade_ID", (req,res) => {
     });
 });
 
+app.get("/subordinate/:supervisor_ID", (req,res) => {
+    const id = req.params.supervisor_ID;
+
+    const q =`
+        SELECT * from supervisor_aspect where Supervisor_ID = ?`;
+    db.query(q, [id], (err, data) => {
+        if(err){
+            return res.json(err)
+        }
+        return res.json(data)
+    });
+});
+
 
 
 app.get("/leavebal/:departmentId", (req,res) => {
@@ -437,6 +527,8 @@ app.get("/leavebal/:departmentId", (req,res) => {
         return res.json(data)
     });
 });
+
+
 
 app.get("/jobreport/:jobTitleId", (req,res) => {
     const id = req.params.jobTitleId;
@@ -473,6 +565,99 @@ app.get("/jobreport/:jobTitleId", (req,res) => {
     });
 });
 
+app.get("/custom_report/:EmployeeID", (req,res) => {
+    const id = req.params.EmployeeID;
+
+    const q =`
+        SELECT
+        field_name,
+        field_val
+        from
+        custom_field_aspect
+        where Employee_ID = ?`;
+    db.query(q, [id], (err, data) => {
+        if(err){
+            return res.json(err)
+        }
+        return res.json(data)
+    });
+});
+
+app.get("/personal-details", (req, res) => {
+    // Handle other cases related to personal details
+    res.send("Personal details route");
+});
+
+// GET personal details by Employee ID
+app.get("/personal-details/:employeeId", (req, res) => {
+    
+    const employeeId = req.params.employeeId; 
+    const q = "SELECT * FROM personal_aspect WHERE Employee_ID = ?";
+    console.log(employeeId);
+    db.query(q, [employeeId], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data[0]);
+    });
+});
+
+app.get("/ra_leaves/:employeeId", (req, res) => {
+    
+    const supervisorID = req.params.employeeId; 
+    const q = "SELECT * FROM leave_request WHERE supervisor_ID = ?";
+    console.log(supervisorID);
+    db.query(q, [supervisorID], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+app.post("/add-custom-field", (req, res) => {
+    const { Field_ID, Field_name } = req.body;
+
+    // Add the custom field to the custom fields table
+    const q = "INSERT INTO custom_field (Field_ID, Field_name) VALUES (?, ?)";
+    db.query(q, [Field_ID, Field_name], (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to add custom field." });
+        }
+        return res.json({ message: "Custom field added successfully." });
+    });
+});
+
+
+app.get("/add-custom-field", (req, res) => {
+    const { Field_ID, Field_name } = req.body;
+
+    // Add the custom field to the custom fields table
+    const q = "select * from custom_field";
+    db.query(q,(err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to add custom field." });
+        }
+        return res.json(data);
+    });
+});
+
+app.post("/add-custom-field/:employeeId", (req, res) => {
+    const employeeId = req.params.employeeId;
+    const { fieldId, fieldVal } = req.body;
+
+    // Add the custom field to the Employee_custom_field table
+    const q = "INSERT INTO Employee_custom_field (Field_ID, Employee_ID, Field_val) VALUES (?, ?, ?)";
+    db.query(q, [fieldId, employeeId, fieldVal], (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Failed to add custom field." });
+        }
+        return res.json({ message: "Custom field added successfully." });
+    });
+});
 
 
 app.listen(8800, () => {
