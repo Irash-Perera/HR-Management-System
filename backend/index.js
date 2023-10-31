@@ -501,26 +501,23 @@ app.get("/subordinate/:supervisor_ID", (req,res) => {
 
 
 
-app.get("/leavebal/:departmentId", (req,res) => {
-    const id = req.params.departmentId;
-
+app.get("/leavebal/", (req,res) => {
+    console.log(req.query);
+    const id = req.query.departmentId;
+    const fromDate = req.query.startDate;
+    const toDate = req.query.endDate;
     const q =`
-        SELECT
-            department.Dept_ID AS Dept_ID,
-            SUM(leave_balance.Annual) AS Annual,
-            SUM(leave_balance.Casual) AS Casual,
-            SUM(leave_balance.Maternity) AS Maternity,
-            SUM(leave_balance.No_pay) AS No_pay
+        SELECT * 
             FROM
-            leave_balance
+            leave_request
             INNER JOIN
-            employee ON employee.Employee_ID = leave_balance.Employee_ID
+            employee ON employee.Employee_ID = leave_request.Employee_ID
             INNER JOIN
             department ON employee.Dept_ID = department.Dept_ID
             WHERE
-            employee.Dept_ID = ?
-            GROUP BY department.Dept_ID`;
-    db.query(q, [id], (err, data) => {
+            employee.Dept_ID = ? AND Start_Date BETWEEN ? AND ?`;
+
+    db.query(q, [id,fromDate,toDate], (err, data) => {
         if(err){
             return res.json(err)
         }
