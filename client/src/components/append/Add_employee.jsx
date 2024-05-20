@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate } from 'react-router-dom';
 import '../styleAssets/Add_employee.css'
@@ -22,16 +21,35 @@ const Add_employee = () => {
     Supervisor_ID: '',
   });
 
+  const [customFieldValue, setcustomFieldValue] = useState({});
+  const [CustomFields, setCustomFields] = useState([]);
+
+  useEffect(() => {
+    const fetchAllCustomField = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/add-custom-field");
+        setCustomFields(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllCustomField();
+  }, []);
+
   const handleChange = (e) => {
     setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCustomChange = (e) => {
+    setcustomFieldValue((prev) => ({ ...prev, [e.target.name]:e.target.value} ));
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8800/employee', employee);
-      console.log(res);
-      navigate('/employee');
+      const res = await axios.post('http://localhost:8800/employee', {employee, customFieldValue});
+      console.log(customFieldValue);
+      //navigate('/employee');
     } catch (err) {
       console.log(err);
     }
@@ -156,6 +174,17 @@ const Add_employee = () => {
           name="Supervisor_ID"
         />
       </div>
+
+      {CustomFields.map((CustomField) => (
+             <div className="form-input">
+             <input
+               type="text"
+               placeholder={CustomField.Field_name}
+               onChange={handleCustomChange}
+               name={CustomField.Field_ID}
+             />
+           </div>
+          ))}
       <button className="submit-button" onClick={handleClick}>
         Submit
       </button>

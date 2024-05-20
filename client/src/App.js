@@ -16,6 +16,7 @@ import Level1Dashboard from './components/dashborads/Level1Dashboard'
 import SupervisorDashboard from './components/dashborads/SupervisorDashboard';
 import HRDashboard from './components/dashborads/HRDashboard';
 import SecMngUserDashboard from './components/dashborads/SecMngUserDashboard';
+import ManagerialEmployeeDashboard from './components/dashborads/ManagerialEmployeeDashboard';
 import Employee from './components/modules/Employee';
 import Branch from './components/modules/Branch';
 import Job from './components/modules/JobTitle';
@@ -35,7 +36,16 @@ import Report from './components/modules/ReportbyDept';
 import Report1 from './components/modules/ReportbyLeave';
 import Report2 from './components/modules/ReportbyPaygrade';
 import Report3 from './components/modules/ReportbyTitle';
+import Report4 from './components/modules/ReportCustom';
 import SecMngUserCreate from './components/append/Add_secmng';
+import HRUserCreate from './components/append/Add_hr';
+import Subordinate from './components/modules/Subordinates';
+import ReqLeave from './components/modules/RequestLeave';
+import PersonalDetails from './components/modules/PersonalDetails';
+import RALeave from './components/modules/RALeaves';
+import ActionTake from './components/configure/ActionTake';
+import AddNewUser from './components/append/NewUserCreate';
+import AddCustomField from './components/append/Add_custom_atttribute';
 
 function App() {
   return (
@@ -49,6 +59,7 @@ function App() {
           <Route path="/supervisor" element={<SupervisorDashboard/>}/>
           <Route path="/hr" element={<HRDashboard/>}/>
           <Route path="/secmanager" element={<SecMngUserDashboard/>}/>
+          <Route path="/manager" element={<ManagerialEmployeeDashboard/>}/>
           <Route path="/configure/:Dept_ID" element={<Configure/>}/>
           <Route path="/append" element={<Append/>}/>
           <Route path="/department" element={<Department/>}/>
@@ -73,11 +84,17 @@ function App() {
           <Route path="/report1" element={<Report1/>}/>
           <Route path="/report2" element={<Report2/>}/>
           <Route path="/report3" element={<Report3/>}/>
+          <Route path="/report4" element={<Report4/>}/>
           <Route path="/add_secmng" element={<SecMngUserCreate/>}/>
-          
+          <Route path="/add_hr" element={<HRUserCreate/>}/>
+          <Route path="/subordinate" element={<Subordinate/>}/>
+          <Route path="/request_leave" element={<ReqLeave/>}/>
+          <Route path= "/personal-details/:employeeId" element={<PersonalDetails/>}/>
+          <Route path= "/request-leave/:employeeId" element={<RALeave/>}/>
+          <Route path= "/action-take/:Employee_ID" element={<ActionTake/>}/>
+          <Route path= "/add-new-user" element={<AddNewUser/>}/>
+          <Route path="/add-custom-field" element={<AddCustomField/>}/>
 
-
-        
         </Routes> 
       </BrowserRouter>  
       

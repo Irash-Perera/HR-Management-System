@@ -6,7 +6,11 @@
     max-width: 1000px;
     margin: 0 auto;
     text-align: center; 
+    background-color: rgb(220, 215, 208);
+    backdrop-filter: 10px;
   }
+
+
   
 
   h1 {

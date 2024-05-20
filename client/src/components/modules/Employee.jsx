@@ -18,16 +18,6 @@ const Employee = () => {
     fetchAllEmployees();
   }, []);
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     const res = await axios.delete(`http://localhost:8800/employee/${id}`);
-  //     console.log(res);
-  //     window.location.reload();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
   return (
     <div>
       <h1 className='company'>Jupiter Apparels</h1>

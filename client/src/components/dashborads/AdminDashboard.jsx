@@ -26,12 +26,18 @@ const AdminDashboard = () => {
           <h1>Welcome, Admin!</h1>
         </header>
 
-        <div className="widget assign-secmng">
+        <div className="widget assign-new">
             <h3><Link to="/add_secmng" className="generate-reports-link">Assign New Second Management User</Link></h3>
             <p>Create new user account for Second Management User</p>
         </div>
 
+        <div className="widget assign-new">
+            <h3><Link to="/add_hr" className="generate-reports-link">Assign New HR Manager</Link></h3>
+            <p>Create new user account for HR Manager</p>
+        </div>
+
       </main>
+      
     </div>
   );
 }

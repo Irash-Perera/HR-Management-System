@@ -15,6 +15,7 @@ const AdminDashboard = () => {
             </button>
           </li>
           <li><button className="add viewbutton"><Link to="/request_leave">Request a Leave</Link></button></li>
+          <li><button className="add viewbutton"><Link to="/employee">Edit Personal Information of the Employees </Link></button></li>
           <li><button className="add viewbutton"><Link to="/departmenthr">View Departments</Link></button></li>
           <li><button className="add viewbutton"><Link to="/job">View Job Titles</Link></button></li>
           <li><button className="add viewbutton"><Link to="/branch"> View Branches</Link></button></li>
@@ -26,6 +27,7 @@ const AdminDashboard = () => {
           <h1>Welcome, Manager!</h1>
         </header>
       </main>
+      
     </div>
   );
 }

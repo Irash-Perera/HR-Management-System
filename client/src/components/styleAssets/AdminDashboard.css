@@ -7,14 +7,15 @@
 
 
 .sidebar {
-  width: 250px;
+  width: 350px;
   backdrop-filter: blur(10px);
   color: #fff;
   padding: 20px;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.2);
   transition: width 0.3s ease;
-  background-image: url('https://images.unsplash.com/photo-1513569771920-c9e1d31714af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');
+  background-image: url('https://images.unsplash.com/photo-1619043518800-7f14be467dca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
   background-size: cover;
+  overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -33,7 +34,7 @@
 }
 
 .sidebar ul li .viewbutton {
-  background-color: #494747;
+  background-color: rgba(73, 71, 71, 0.5); /* Use rgba for transparency */
   padding: 10px;
   border: none;
   width: 100%;
@@ -42,13 +43,17 @@
   display: block;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  border-radius: 8px; /* Optional: Add some border-radius for a rounded look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box-shadow */
 }
 
 .sidebar ul li .viewbutton a {
   color: #fff;
   text-decoration: none;
-  display: block;
+  display:block;
+  
   padding-left: 20px;
+  
 }
 
 .sidebar ul li .viewbutton:hover {
@@ -60,7 +65,8 @@
   padding: 20px;
   transition: margin-left 0.3s ease;
   background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-  background-size: cover; 
+  background-size: cover;
+  overflow-y: auto;
 }
 
 .content header {
@@ -69,6 +75,7 @@
   padding: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  
 }
 
 .content header h1 {
@@ -82,15 +89,8 @@
   justify-content: space-between;
 }
 
-
-
-
-/* Existing CSS Styles */
-
-/* Add these styles to your existing CSS */
-
 .generate-reports {
-  background-color: rgba(0, 0, 0, 0.8); /* Dark black background */
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   border-radius: 10px;
   padding: 20px;
@@ -108,7 +108,7 @@
 
 .generate-reports p {
   font-size: 18px;
-  color: #fff; /* White text color */
+  color: #fff; 
 }
 
 .generate-reports-link {
@@ -121,12 +121,12 @@
   transition: background-color 0.3s ease; 
 }
 
-.generate-reports:hover {
-  background-color: rgba(0, 0, 0, 0.9); /* Darker black on hover */
+.assign-new:hover {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
-.assign-secmng {
-  background-color: rgba(0, 0, 0, 0.8); /* Dark black background */
+.assign-new {
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
@@ -135,18 +135,18 @@
   position: relative;
 }
 
-.assign-secmng h3 a,
+.assign-new h3 a,
 .assign-secmng h3 a {
   text-decoration: none; 
   color: #fff; 
 }
 
-.assign-secmng p {
+.assign-new p {
   font-size: 18px;
-  color: #fff; /* White text color */
+  color: #fff;
 }
 
-.assign-secmng-link {
+.assign-new-link {
   position:absolute;
   top: 0;
   left: 0;
