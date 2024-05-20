@@ -21,9 +21,13 @@ h1 {
 }
 
 .Employee-table {
-    width: 100%;
-    border-collapse: collapse;
+    width:fit-content;
+    border-collapse:collapse;
     border-spacing: 0;
+    
+
+
+
 }
 
 

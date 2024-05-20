@@ -19,6 +19,7 @@ const AdminDashboard = () => {
           <li><button className="add viewbutton"><Link to="/paygrade">Edit Leave Allowances</Link></button></li>
           <li><button className="add viewbutton"><Link to="/add-custom-field">Add Custom Field</Link></button></li>
           <li><button className="add viewbutton"><Link to="/add-new-user">Create New User Account</Link></button></li>
+          <li><button className="add viewbutton"><Link to="/request_leave">Request a Leave</Link></button></li>
           <li>
             <button className="add viewbutton">
               <Link to={`/personal-details/${employeeId}`}>View My Personal Information</Link>
@@ -59,6 +60,7 @@ const AdminDashboard = () => {
         </div>
 
       </main>
+      
     </div>
   );
 }

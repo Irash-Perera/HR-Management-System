@@ -10,10 +10,11 @@ const db = mysql.createConnection({
     user:"root",
     password:"2001",
     database:"jupiterapparels"
-})
+}) 
 
 app.use(express.json())
 app.use(cors())
+
 
 
 app.get("/", (req, res) => {
@@ -28,6 +29,11 @@ app.post("/login", (req, res) => {
         if (err) {
             console.error(err);
             return res.json("Error");
+        }
+
+        if (data.length === 0) {
+            // User not found
+            return res.json("User not found");
         }
 
         const user = data[0];
@@ -498,7 +504,6 @@ app.get("/subordinate/:supervisor_ID", (req,res) => {
         return res.json(data)
     });
 });
-
 
 
 app.get("/leavebal/", (req,res) => {

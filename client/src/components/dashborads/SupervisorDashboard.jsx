@@ -31,6 +31,7 @@ const SupervisorDashboard = () => {
         </header>
 
       </main>
+      
     </div>
   );
 }
