@@ -6,10 +6,10 @@ import bcrypt from "bcrypt";
 const app = express()
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"2001",
-    database:"jupiterapparels"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 }) 
 
 app.use(express.json())
@@ -661,7 +661,7 @@ app.post("/add-custom-field/:employeeId", (req, res) => {
     });
 });
 
-
-app.listen(8800, () => {
+const PORT = process.env.PORT || 8800;
+app.listen(PORT, () => {
     console.log("Backend server is running!!")
 })
